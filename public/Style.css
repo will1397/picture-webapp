@@ -1,0 +1,14 @@
+
+  #signup-container {
+      padding-top: 20px; /* Pads the form from the top of the card */
+      margin-top: 20px; /* Pads the card from the navbar */
+  }
+
+  #u-input {
+      padding-bottom: 20px;
+  }
+
+  #submit-button {
+      padding-top: 20px;
+      justify-content: center;
+  }
