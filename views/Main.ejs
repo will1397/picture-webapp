@@ -8,23 +8,23 @@
                 <% include ../partials/header %>
         </header>
 
-        <div class="btn-group btn-group-justified" id="boxes">
-            <ul>
+        <div class="container-fluid">
+            <div class="row" id="boxes">
                 <% cards.forEach(function(obj) { %>
-                    <div class="btn-justified col-xs-10 col-md-3">
+                    <div class="col-sm d-flex">
                         <div class="card" style="width: 18rem;">
                             <img 
                                 class="card-img-top"
                                 src="data:image/png;base64, <%= obj.data.buffer %>"
                             </img>
-                            <div class="card-body">
+                            <div class="card-body flex-fill">
                                 <h5 class="card-title"><%= obj.title %></h5>
                                 <p class="card-text"><%= obj.description %></p>
                             </div>
                         </div>
                     </div>
                 <% }) %>
-            </ul>
+            </div>
         </div>
 
     </body>
