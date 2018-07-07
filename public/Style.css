@@ -1,3 +1,11 @@
+  #body-main {
+    background-image:url("wallpaper_bw.jpg");
+    background-size: cover;
+  }
+
+  #container-card {
+      text-align: center;
+  }
 
   #signup-container {
       padding-top: 20px; /* Pads the form from the top of the card */
