@@ -41,27 +41,33 @@ app.post('/login', function(req, res) {
     form.multiples = true;
     form.keepExtensions = true
 
-	form.parse(req, function(err, fields, files) {
-        //Query database for username and hashed password
-        MongoClient.connect(url, function(err, db) {
-            if (err) throw err;
-            var dbo = db.db("mydb");
+	form.parse(req, function(err, fields) {
+        if (fields.user.indexOf(' ') >= 0 || fields.pass.indexOf(' ') >= 0) {
+            res.render('Login', {msg: 'Wrong username/password'});
+        }
 
-            dbo.collection("pictures").find({"user" : fields.user}).toArray(function(err, result) {
+        else {
+            //Query database for username and hashed password
+            MongoClient.connect(url, function(err, db) {
                 if (err) throw err;
-                bcrypt.compare(fields.pass, result[0].pass, function(err, re) {
-                    if (err) throw err;
+                var dbo = db.db("mydb");
 
-                    if (re === true) {
-                        res.render('Admin', {msg: ''});
-                    }
-                    else {
-                        res.render('Login', {msg: 'Wrong username/password'});
-                    }
+                dbo.collection("pictures").find({"user" : fields.user}).toArray(function(err, result) {
+                    if (err) throw err;
+                    bcrypt.compare(fields.pass, result[0].pass, function(err, re) {
+                        if (err) throw err;
+
+                        if (re === true) {
+                            res.render('Admin', {msg: ''});
+                        }
+                        else {
+                            res.render('Login', {msg: 'Wrong username/password'});
+                        }
+                    });
+                    db.close();
                 });
-                db.close();
             });
-        });
+        }
     });
 });
 

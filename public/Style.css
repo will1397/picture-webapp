@@ -20,3 +20,9 @@
       padding-top: 20px;
       justify-content: center;
   }
+
+  #body-login {
+    background-image:url("wallpaper_bw.jpg");
+    background-size: cover;
+    text-align: center;
+  }
