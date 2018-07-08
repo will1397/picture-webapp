@@ -1,5 +1,5 @@
   #body-main {
-    background-image:url("wallpaper_bw.jpg");
+    background-image:url("faded-clock.jpg");
     background-size: cover;
   }
 
@@ -22,7 +22,7 @@
   }
 
   #body-login {
-    background-image:url("wallpaper_bw.jpg");
+    background-image:url("faded-clock.jpg");
     background-size: cover;
     text-align: center;
   }
