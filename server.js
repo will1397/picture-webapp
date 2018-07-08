@@ -17,7 +17,9 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res) {
     MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
         var dbo = db.db("mydb");
+
         dbo.collection("pictures").find({"picture": {$exists : true}}).toArray(function(err, result) {
             result.forEach(function(value) {
                 value.data.buffer = new Buffer(value.data.buffer).toString('base64');

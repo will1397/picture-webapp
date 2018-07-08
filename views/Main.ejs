@@ -8,13 +8,39 @@
                 <% include ../partials/header %>
         </header>
 
-        <div class="card">
-            <h5 class="card-header">Factions</h5>
-            <div class="card-body">
-                <a href="#" class="btn btn-dark">Hordes</a>
-                <a href="#" class="btn btn-dark">Other</a>
+        <div id="tab-container" class="container-fluid">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs justify-content-center" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#Warmachine">Warmachine</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#Hordes">Hordes</a>
+              </li>
+            </ul>
+          
+            <!-- Tab panes -->
+            <div id="tab-content" class="tab-content text-center">
+              <div id="Warmachine" class="container tab-pane active"><br>
+                <a href="#" class="btn btn-dark">Cygnar</a>
+                <a href="#" class="btn btn-dark">Protectorate Of Menoth</a>
+                <a href="#" class="btn btn-dark">Khador</a>
+                <a href="#" class="btn btn-dark">Cryx</a>
+                <a href="#" class="btn btn-dark">Retribution Of Scyrah</a>
+                <a href="#" class="btn btn-dark">Convergence Of Cyriss</a>
+                <a href="#" class="btn btn-dark">Crucible Guard</a>
+                <a href="#" class="btn btn-dark">Mercenaries</a>
+              </div>
+              <div id="Hordes" class="container tab-pane fade"><br>
+                <a href="#" class="btn btn-dark">Trollblood</a>
+                <a href="#" class="btn btn-dark">Circle Orboros</a>
+                <a href="#" class="btn btn-dark">Legion Of Everblight</a>
+                <a href="#" class="btn btn-dark">Skorne</a>
+                <a href="#" class="btn btn-dark">Grymkin</a>
+                <a href="#" class="btn btn-dark">Minions</a>
+              </div>
             </div>
-        </div>
+          </div>
 
         <div id="container-card" class="container-fluid">
             <div class="row" id="boxes">

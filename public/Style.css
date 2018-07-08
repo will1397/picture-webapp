@@ -3,6 +3,15 @@
     background-size: cover;
   }
 
+  #tab-container {
+    background-color: white;
+    margin-bottom: 10px;
+  }
+
+  #tab-content {
+    padding-bottom: 15px;
+  }
+
   #container-card {
       text-align: center;
   }
