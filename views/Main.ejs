@@ -5,7 +5,7 @@
     </head>
   <body id="body-main">
         <header>
-                <% include ../partials/header %>
+            <% include ../partials/header %>
         </header>
 
         <div id="tab-container" class="container-fluid">
@@ -22,44 +22,51 @@
             <!-- Tab panes -->
             <div id="tab-content" class="tab-content text-center">
               <div id="Warmachine" class="container tab-pane active"><br>
-                <a href="#" class="btn btn-dark">Cygnar</a>
-                <a href="#" class="btn btn-dark">Protectorate Of Menoth</a>
-                <a href="#" class="btn btn-dark">Khador</a>
-                <a href="#" class="btn btn-dark">Cryx</a>
-                <a href="#" class="btn btn-dark">Retribution Of Scyrah</a>
-                <a href="#" class="btn btn-dark">Convergence Of Cyriss</a>
-                <a href="#" class="btn btn-dark">Crucible Guard</a>
-                <a href="#" class="btn btn-dark">Mercenaries</a>
+                <button onclick="showDeck(this.id);" id="Cygnar" class="btn btn-dark">Cygnar</button>
+                <button onclick="showDeck(this.id);" id="Protectorate Of Menoth" class="btn btn-dark">Protectorate Of Menoth</button>
+                <button onclick="showDeck(this.id);" id="Khador" class="btn btn-dark">Khador</button>
+                <button onclick="showDeck(this.id);" id="Cryx" class="btn btn-dark">Cryx</button>
+                <button onclick="showDeck(this.id);" id="Retribution Of Scyrah" class="btn btn-dark">Retribution Of Scyrah</button>
+                <button onclick="showDeck(this.id);" id="Convergence Of Cyriss" class="btn btn-dark">Convergence Of Cyriss</button>
+                <button onclick="showDeck(this.id);" id="Crucible Guard" class="btn btn-dark">Crucible Guard</button>
+                <button onclick="showDeck(this.id);" id="Mercenaries" class="btn btn-dark">Mercenaries</button>
               </div>
               <div id="Hordes" class="container tab-pane fade"><br>
-                <a href="#" class="btn btn-dark">Trollblood</a>
-                <a href="#" class="btn btn-dark">Circle Orboros</a>
-                <a href="#" class="btn btn-dark">Legion Of Everblight</a>
-                <a href="#" class="btn btn-dark">Skorne</a>
-                <a href="#" class="btn btn-dark">Grymkin</a>
-                <a href="#" class="btn btn-dark">Minions</a>
+                <button onclick="showDeck(this.id);" id="Trollblood" class="btn btn-dark">Trollblood</button>
+                <button onclick="showDeck(this.id);" id="Circle Orboros" class="btn btn-dark">Circle Orboros</button>
+                <button onclick="showDeck(this.id);" id="Legion Of Everblight" class="btn btn-dark">Legion Of Everblight</button>
+                <button onclick="showDeck(this.id);" id="Skorne" class="btn btn-dark">Skorne</button>
+                <button onclick="showDeck(this.id);" id="Grymkin" class="btn btn-dark">Grymkin</button>
+                <button onclick="showDeck(this.id);" id="Minions" class="btn btn-dark">Minions</button>
               </div>
-            </div>
-          </div>
-
-        <div id="container-card" class="container-fluid">
-            <div class="row" id="boxes">
-                <% cards.forEach(function(obj) { %>
-                    <div class="col-sm d-flex">
-                        <div class="card">
-                            <img 
-                                class="card-img-top"
-                                src="data:image/png;base64, <%= obj.data.buffer %>"
-                            </img>
-                            <div class="card-body flex-fill">
-                                <h5 class="card-title"><%= obj.title %></h5>
-                                <p class="card-text"><%= obj.description %></p>
-                            </div>
-                        </div>
-                    </div>
-                <% }) %>
             </div>
         </div>
 
+        <div id="container-card" class="container-fluid"></div>
+
+        <script>
+            function showDeck(name_type) {
+                console.log(name_type);
+                $.ajax({
+                    url: '/getType',
+                    type: 'POST',
+                    data: name_type,
+                    processData: false,
+                    contentType: false,
+                    success: function(data) {
+                        var html = '<div class="row" id="boxes">';
+                        data.forEach(function(obj) {
+                            html += '<div class="col-sm d-flex"><div class="card">';
+                            html += '<img class="card-img-top" src="data:image/png;base64, ' + obj.data + '"</img>';
+                            html += '<div class="card-body flex-fill"><h5 class="card-title">' + obj.title + '</h5>';
+                            html += '<p class="card-text">' + obj.description + '</p></div></div></div>';
+                        });
+                        html += '</div>';
+                        console.log(html);
+                        $('#container-card').html(html);
+                    }
+                });
+            }
+        </script>
     </body>
 </html>

@@ -16,17 +16,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res) {
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("mydb");
-
-        dbo.collection("pictures").find({"picture": {$exists : true}}).toArray(function(err, result) {
-            result.forEach(function(value) {
-                value.data.buffer = new Buffer(value.data.buffer).toString('base64');
-            });
-            res.render('Main', {cards : result}) //can return empty or non-empty result
-        });
-    });
+    res.render('Main', {cards: []});
 });
 
 app.get('/Login', function(req, res) {
@@ -36,6 +26,20 @@ app.get('/Login', function(req, res) {
 //Only allow access to admin page via successful login
 app.get('/Admin', function(req, res) {
     res.render('Login', {msg: ''});
+});
+
+app.post('/getType', function(req, res) {
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("mydb");
+
+        dbo.collection("pictures").find({"picture": {$exists : true}}).toArray(function(err, result) {
+            result.forEach(function(value) {
+                value.data.buffer = new Buffer(value.data.buffer).toString('base64');
+            });
+            res.send(result);
+        });
+    });
 });
 
 app.post('/login', function(req, res) {
