@@ -1,9 +1,14 @@
 var express = require('express');
 var app = express();
 
+//Used for form POST requests
 var formidable = require('formidable');
 const path = require('path')
 var fs = require('fs');
+
+//Used for ajax POST requests
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({extended : true});
 
 var mongo = require('mongodb');
 var binary = require('mongodb').Binary;
@@ -16,7 +21,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res) {
-    res.render('Main', {cards: []});
+    res.render('Main');
 });
 
 app.get('/Login', function(req, res) {
@@ -28,12 +33,12 @@ app.get('/Admin', function(req, res) {
     res.render('Login', {msg: ''});
 });
 
-app.post('/getType', function(req, res) {
+app.post('/getType', urlencodedParser, function(req, res) {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("mydb");
 
-        dbo.collection("pictures").find({"picture": {$exists : true}}).toArray(function(err, result) {
+        dbo.collection("pictures").find({"army": req.body.str}).toArray(function(err, result) {
             result.forEach(function(value) {
                 value.data.buffer = new Buffer(value.data.buffer).toString('base64');
             });
@@ -45,7 +50,7 @@ app.post('/getType', function(req, res) {
 app.post('/login', function(req, res) {
     var form = new formidable.IncomingForm();
     form.multiples = true;
-    form.keepExtensions = true
+    form.keepExtensions = true;
 
 	form.parse(req, function(err, fields) {
         if (fields.user.indexOf(' ') >= 0 || fields.pass.indexOf(' ') >= 0) {
@@ -86,8 +91,8 @@ app.post('/upload', function(req, res) {
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db("mydb");
-            var bdata = fs.readFileSync(files.picture_file.path);;
-            var obj = {title : fields.title_text, description : fields.des_text, picture : files.picture_file.name, data : bdata};
+            var bdata = fs.readFileSync(files.picture_file.path);
+            var obj = {title : fields.title_text, description : fields.des_text, army : fields.army_type ,picture : files.picture_file.name, data : bdata};
 
             dbo.collection("pictures").insertOne(obj, function(err, re) {
                 if (err) throw err;

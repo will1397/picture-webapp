@@ -35,3 +35,8 @@
     background-size: cover;
     text-align: center;
   }
+
+  .card-img-top {
+    height: 15rem;
+    object-fit: cover;
+  }

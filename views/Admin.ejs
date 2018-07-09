@@ -3,7 +3,7 @@
     <head>
         <% include ../partials/head.ejs %>
     </head>
-    <body id="fileinput-body">
+    <body id="body-main">
 
     <header><% include ../partials/header.ejs %></header>
 
@@ -24,6 +24,26 @@
                 <textarea name="des_text" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
 
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Army</label>
+                <select name="army_type" id="exampleFormControlSelect1">
+                    <option>Cygnar</option>
+                    <option>Protectorate Of Menoth</option>
+                    <option>Khador</option>
+                    <option>Cryx</option>
+                    <option>Retribution Of Scyrah</option>
+                    <option>Convergence Of Cyriss</option>
+                    <option>Crucible Guard</option>
+                    <option>Mercenaries</option>
+                    <option>Trollblood</option>
+                    <option>Circle Orboros</option>
+                    <option>Legion Of Everblight</option>
+                    <option>Skorne</option>
+                    <option>Grymkin</option>
+                    <option>Minions</option>
+                </select>
+            </div>
+
             <div class="form-group" id="submit-button">
                 <label class="control-label"></label>
                 <div class="">
@@ -33,7 +53,9 @@
         </form>
     </div>
 
-    <p><%= msg %></p>
+    <div style="color: white; text-align: center">
+        <p><%= msg %></p>
+    </div>
 
     </body>
 </html>
